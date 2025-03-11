@@ -1,0 +1,67 @@
+<div class="container mx-auto p-4">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-800">Pets</h1>
+    <button mat-raised-button color="primary" (click)="novoPet()">
+      <mat-icon>add</mat-icon>
+      Novo Pet
+    </button>
+  </div>
+
+  <mat-card class="shadow-lg">
+    <mat-card-content>
+      <table mat-table [dataSource]="dataSource" class="w-full">
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let pet"> {{pet.id}} </td>
+        </ng-container>
+
+        <!-- Nome Column -->
+        <ng-container matColumnDef="nome">
+          <th mat-header-cell *matHeaderCellDef> Nome </th>
+          <td mat-cell *matCellDef="let pet"> {{pet.nome}} </td>
+        </ng-container>
+
+        <!-- Tipo Column -->
+        <ng-container matColumnDef="tipo">
+          <th mat-header-cell *matHeaderCellDef> Tipo </th>
+          <td mat-cell *matCellDef="let pet"> {{pet.tipo}} </td>
+        </ng-container>
+
+        <!-- Raça Column -->
+        <ng-container matColumnDef="raca">
+          <th mat-header-cell *matHeaderCellDef> Raça </th>
+          <td mat-cell *matCellDef="let pet"> {{pet.raca}} </td>
+        </ng-container>
+
+        <!-- Idade Column -->
+        <ng-container matColumnDef="idade">
+          <th mat-header-cell *matHeaderCellDef> Idade </th>
+          <td mat-cell *matCellDef="let pet"> {{pet.idade}} anos </td>
+        </ng-container>
+
+        <!-- Tutor Column -->
+        <ng-container matColumnDef="tutor">
+          <th mat-header-cell *matHeaderCellDef> Tutor </th>
+          <td mat-cell *matCellDef="let pet"> {{pet.tutor.nome}} </td>
+        </ng-container>
+
+        <!-- Ações Column -->
+        <ng-container matColumnDef="acoes">
+          <th mat-header-cell *matHeaderCellDef> Ações </th>
+          <td mat-cell *matCellDef="let pet">
+            <button mat-icon-button color="primary" (click)="editarPet(pet.id!)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="excluirPet(pet.id!)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </mat-card-content>
+  </mat-card>
+</div> 

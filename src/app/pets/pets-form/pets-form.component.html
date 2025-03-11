@@ -1,0 +1,78 @@
+<div class="container mx-auto p-4">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold text-gray-800">
+      {{ isEditMode ? 'Editar Pet' : 'Novo Pet' }}
+    </h1>
+    <button mat-button (click)="voltar()">
+      <mat-icon>arrow_back</mat-icon>
+      Voltar
+    </button>
+  </div>
+
+  <mat-card class="shadow-lg">
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome" placeholder="Digite o nome do pet">
+            <mat-error *ngIf="form.get('nome')?.hasError('required')">
+              Nome é obrigatório
+            </mat-error>
+            <mat-error *ngIf="form.get('nome')?.hasError('minlength')">
+              Nome deve ter no mínimo 3 caracteres
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Tipo</mat-label>
+            <input matInput formControlName="tipo" placeholder="Ex: Cachorro, Gato">
+            <mat-error *ngIf="form.get('tipo')?.hasError('required')">
+              Tipo é obrigatório
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Raça</mat-label>
+            <input matInput formControlName="raca" placeholder="Digite a raça do pet">
+            <mat-error *ngIf="form.get('raca')?.hasError('required')">
+              Raça é obrigatória
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Idade</mat-label>
+            <input matInput type="number" formControlName="idade" placeholder="Idade em anos">
+            <mat-error *ngIf="form.get('idade')?.hasError('required')">
+              Idade é obrigatória
+            </mat-error>
+            <mat-error *ngIf="form.get('idade')?.hasError('min')">
+              Idade deve ser maior que 0
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="w-full">
+            <mat-label>Tutor</mat-label>
+            <mat-select formControlName="tutor">
+              <mat-option *ngFor="let tutor of tutores" [value]="tutor.id">
+                {{tutor.nome}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="form.get('tutor')?.hasError('required')">
+              Tutor é obrigatório
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="flex justify-end space-x-2">
+          <button mat-button type="button" (click)="voltar()">
+            Cancelar
+          </button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">
+            {{ isEditMode ? 'Atualizar' : 'Cadastrar' }}
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div> 

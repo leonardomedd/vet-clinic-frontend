@@ -1,0 +1,124 @@
+.container {
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+
+  h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+  }
+}
+
+.header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.table-container {
+  position: relative;
+  min-height: 200px;
+  max-height: 400px;
+  overflow: auto;
+
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+}
+
+.mat-mdc-table {
+  width: 100%;
+}
+
+.mat-column-acoes {
+  width: 120px;
+  text-align: center;
+}
+
+.mat-column-status {
+  width: 100px;
+  text-align: center;
+}
+
+.mat-column-data,
+.mat-column-hora {
+  width: 100px;
+}
+
+.mat-column-pet,
+.mat-column-tutor {
+  min-width: 200px;
+}
+
+.mat-mdc-row:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
+
+.mat-mdc-header-cell {
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-mdc-cell {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.mat-mdc-paginator {
+  background-color: transparent;
+}
+
+.mat-mdc-form-field {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.mat-mdc-card {
+  margin-bottom: 1rem;
+}
+
+.mat-mdc-spinner {
+  margin: 2rem auto;
+}
+
+.status-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  &.agendado {
+    background-color: #e3f2fd;
+    color: #1976d2;
+  }
+
+  &.confirmado {
+    background-color: #f3e5f5;
+    color: #7b1fa2;
+  }
+
+  &.cancelado {
+    background-color: #ffebee;
+    color: #d32f2f;
+  }
+
+  &.realizado {
+    background-color: #e8f5e9;
+    color: #388e3c;
+  }
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.mr-2 {
+  margin-right: 0.5rem;
+} 
