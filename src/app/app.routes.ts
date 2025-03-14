@@ -1,29 +1,15 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './auth/auth.guard';
+import { LoginComponent } from './auth/login/login.component';
+import { TutoresListComponent } from './tutores/tutores-list/tutores-list.component';
+import { PetsListComponent } from './pets/pets-list/pets-list.component';
+import { AgendamentosListComponent } from './agendamentos/agendamentos-list/agendamentos-list.component';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
-  {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule)
-  },
-  {
-    path: 'tutores',
-    loadChildren: () => import('./tutores/tutores.module').then(m => m.TutoresModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'pets',
-    loadChildren: () => import('./pets/pets.module').then(m => m.PetsModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'agendamentos',
-    loadChildren: () => import('./agendamentos/agendamentos.module').then(m => m.AgendamentosModule),
-    canActivate: [AuthGuard]
-  },
-  {
-    path: '',
-    redirectTo: 'auth',
-    pathMatch: 'full'
-  }
+  { path: 'login', component: LoginComponent },
+  { path: 'tutores', component: TutoresListComponent, canActivate: [authGuard] },
+  { path: 'pets', component: PetsListComponent, canActivate: [authGuard] },
+  { path: 'agendamentos', component: AgendamentosListComponent, canActivate: [authGuard] },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '**', redirectTo: '/login' }
 ];

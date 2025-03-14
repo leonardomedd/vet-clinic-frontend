@@ -1,40 +1,31 @@
-import { Component } from '@angular/core';
-import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { AuthService } from './core/services/auth.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatMenuModule } from '@angular/material/menu';
 import { CommonModule } from '@angular/common';
+import { AuthService } from './core/services/auth.service'; // Caminho corrigido
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    RouterLink,
-    RouterLinkActive,
-    MatToolbarModule,
-    MatButtonModule,
-    MatIconModule,
-    MatMenuModule
-  ]
+  imports: [CommonModule, MatToolbarModule, MatButtonModule, MatIconModule, RouterOutlet]
 })
-export class AppComponent {
-  get usuario() {
-    return this.authService.getUsuarioLogado();
+export class AppComponent implements OnInit {
+  usuario: any = null;
+  private authService = inject(AuthService);
+
+  ngOnInit(): void {
+    this.authService.currentUser$.pipe(filter(user => user !== null)).subscribe((user: any) => {
+      this.usuario = user;
+    });
   }
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
-
-  logout() {
+  logout(): void {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.usuario = null;
   }
 }

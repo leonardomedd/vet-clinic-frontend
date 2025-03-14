@@ -1,0 +1,23 @@
+mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  button {
+    font-size: 1rem;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: normal;
+    margin-left: 8px;
+  }
+  
+  .active {
+    background-color: #e0e0e0;
+    border-radius: 4px;
+  }
+  
+  mat-icon {
+    vertical-align: middle;
+    margin-right: 4px;
+  }

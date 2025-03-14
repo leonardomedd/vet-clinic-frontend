@@ -1,34 +1,33 @@
-import { HttpInterceptorFn } from '@angular/common/http';
-import { inject } from '@angular/core';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
-import { AuthService } from '../../auth/auth.service';
-import { ErrorHandlerService } from '../services/error-handler.service';
+import { Injectable } from '@angular/core';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpHandler,
+  HttpEvent
+} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { AuthService } from '../services/auth.service';
 
-export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  const authService = inject(AuthService);
-  const errorHandler = inject(ErrorHandlerService);
-  const token = authService.getToken();
+@Injectable()
+export class AuthInterceptor implements HttpInterceptor {
+  constructor(private authService: AuthService) {}
 
-  if (token && !req.url.includes('/auth/login')) {
-    const cloned = req.clone({
-      headers: req.headers.set('Authorization', `Bearer ${token}`)
-    });
-    return next(cloned).pipe(
-      catchError(error => {
-        if (error.status === 401) {
-          authService.logout();
+  intercept(
+    req: HttpRequest<any>,
+    next: HttpHandler
+  ): Observable<HttpEvent<any>> {
+    const token = this.authService.getToken();
+    console.log('Token no interceptor:', token); // Adicione este log
+
+    if (token) {
+      const cloned = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${token}`
         }
-        errorHandler.handleError(error);
-        return throwError(() => error);
-      })
-    );
-  }
+      });
+      return next.handle(cloned);
+    }
 
-  return next(req).pipe(
-    catchError(error => {
-      errorHandler.handleError(error);
-      return throwError(() => error);
-    })
-  );
-}; 
+    return next.handle(req);
+  }
+}

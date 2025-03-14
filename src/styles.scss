@@ -1,9 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
-
 @use '@angular/material' as mat;
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 // Incluir os estilos base do Material
 @include mat.core();
@@ -115,47 +113,55 @@ body {
 }
 
 // Estilos para navegação
+mat-toolbar {
+  padding: 0 16px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+}
+
 .nav-link {
-  position: relative !important;
-  min-width: 90px !important;
-  height: 36px !important;
-  margin: 0 2px !important;
-  padding: 0 12px !important;
-  border-radius: 4px !important;
-  display: inline-flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 4px !important;
-  transition: all 0.2s ease !important;
-  font-size: 14px !important;
-  font-weight: 400 !important;
-  color: rgba(255, 255, 255, 0.9) !important;
-  text-transform: none !important;
-  background-color: transparent !important;
+  position: relative;
+  min-width: 90px;
+  height: 36px;
+  margin: 0 4px;
+  padding: 0 12px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.9);
+  text-transform: none;
+  background-color: transparent;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   mat-icon {
-    font-size: 20px !important;
-    width: 20px !important;
-    height: 20px !important;
-    line-height: 20px !important;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    vertical-align: middle;
   }
 
   span {
-    margin: 0 !important;
-    line-height: 36px !important;
+    margin: 0;
+    line-height: 36px;
   }
 }
 
 .nav-active {
-  background-color: rgba(255, 255, 255, 0.15) !important;
-  font-weight: 500 !important;
-  
+  background-color: rgba(255, 255, 255, 0.15);
+  font-weight: 500;
+
   &:hover {
-    background-color: rgba(255, 255, 255, 0.2) !important;
+    background-color: rgba(255, 255, 255, 0.2);
   }
 
   &::after {
@@ -169,7 +175,10 @@ body {
   }
 }
 
-.mat-toolbar {
-  padding: 0 16px !important;
-  height: 56px !important;
+button.mat-raised-button {
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: normal;
+  padding: 0 16px;
 }
